@@ -3,7 +3,6 @@
     var ret = $.Deferred();
 
     function onError() {
-      console.log('Loading error', arguments);
       ret.reject();
     }
 
@@ -27,6 +26,8 @@
         $.when(pt, obv).done(function(patient, obv) {
           var byCodes = smart.byCodes(obv, 'code');
           var gender = patient.gender;
+          var id = patient.id;
+          var identifier = patient.identifier;
 
           var fname = '';
           var lname = '';
@@ -48,6 +49,8 @@
           p.fname = fname;
           p.lname = lname;
           p.height = getQuantityValueAndUnit(height[0]);
+          p.id = id;
+          p.identifier = identifier;
 
           if (typeof systolicbp != 'undefined')  {
             p.systolicbp = systolicbp;
@@ -83,6 +86,8 @@
       diastolicbp: {value: ''},
       ldl: {value: ''},
       hdl: {value: ''},
+      id: {value: ''},
+      identifier: {value: ''}
     };
   }
 
